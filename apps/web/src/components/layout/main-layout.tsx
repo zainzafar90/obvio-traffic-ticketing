@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import { useTheme } from "@/providers/theme/theme-provider";
 import {
   ArrowRightStartOnRectangleIcon,
   ChevronUpIcon,
+  CommandLineIcon,
   HomeIcon,
   LightBulbIcon,
   MoonIcon,
@@ -12,6 +14,7 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/16/solid";
 
+import { ShortcutsDialog } from "@/components/shortcuts-dialog";
 import { Avatar } from "@/components/ui/avatar";
 import {
   Dropdown,
@@ -44,6 +47,7 @@ function AccountDropdownMenu({
   const navigate = useNavigate();
   const { mutateAsync: logoutMutation } = useLogout();
   const { theme, setTheme } = useTheme();
+  const [shortcutsDialogOpen, setShortcutsDialogOpen] = useState(false);
 
   const handleLogout = async () => {
     await logoutMutation(undefined, {
@@ -54,31 +58,42 @@ function AccountDropdownMenu({
   };
 
   return (
-    <DropdownMenu className="min-w-64" anchor={anchor}>
-      <DropdownItem href="#">
-        <UserCircleIcon />
-        <DropdownLabel>My account</DropdownLabel>
-      </DropdownItem>
-      <DropdownItem
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      >
-        {theme === "dark" ? <SunIcon /> : <MoonIcon />}
-        <DropdownLabel>
-          Switch to {theme === "dark" ? "Light mode" : "Dark mode"}
-        </DropdownLabel>
-      </DropdownItem>
+    <>
+      <DropdownMenu className="min-w-64" anchor={anchor}>
+        <DropdownItem onClick={() => setShortcutsDialogOpen(true)}>
+          <CommandLineIcon />
+          <DropdownLabel>Keyboard shortcuts</DropdownLabel>
+        </DropdownItem>
+        <DropdownItem
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        >
+          {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+          <DropdownLabel>
+            Switch to {theme === "dark" ? "Light mode" : "Dark mode"}
+          </DropdownLabel>
+        </DropdownItem>
 
-      <DropdownDivider />
-      <DropdownItem href="#">
-        <LightBulbIcon />
-        <DropdownLabel>Share feedback</DropdownLabel>
-      </DropdownItem>
-      <DropdownDivider />
-      <DropdownItem onClick={handleLogout}>
-        <ArrowRightStartOnRectangleIcon />
-        <DropdownLabel>Sign out</DropdownLabel>
-      </DropdownItem>
-    </DropdownMenu>
+        <DropdownDivider />
+        <DropdownItem href="#">
+          <UserCircleIcon />
+          <DropdownLabel>My account</DropdownLabel>
+        </DropdownItem>
+        <DropdownItem href="#">
+          <LightBulbIcon />
+          <DropdownLabel>Share feedback</DropdownLabel>
+        </DropdownItem>
+        <DropdownDivider />
+        <DropdownItem onClick={handleLogout}>
+          <ArrowRightStartOnRectangleIcon />
+          <DropdownLabel>Sign out</DropdownLabel>
+        </DropdownItem>
+      </DropdownMenu>
+
+      <ShortcutsDialog
+        isOpen={shortcutsDialogOpen}
+        onOpenChange={setShortcutsDialogOpen}
+      />
+    </>
   );
 }
 
