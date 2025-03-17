@@ -1,0 +1,33 @@
+{
+  "resourcePolicies": [
+    {
+      "version": "default",
+      "resource": "users",
+      "rules": [
+        {
+          "actions": ["*"],
+          "roles": ["user"],
+          "effect": "EFFECT_ALLOW"
+        }
+      ]
+    },
+    {
+      "version": "default",
+      "resource": "events",
+      "rules": [
+        {
+          "actions": ["view", "update"],
+          "roles": ["user"],
+          "effect": "EFFECT_ALLOW"
+        }
+      ]
+    },
+    {
+      "version": "default",
+      "resource": "dmv",
+      "rules": [
+        { "actions": ["view"], "roles": ["user"], "effect": "EFFECT_ALLOW" }
+      ]
+    }
+  ]
+}

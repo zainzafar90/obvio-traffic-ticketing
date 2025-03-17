@@ -1,0 +1,40 @@
+{
+  "name": "@obvio/monorepo",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "build:api": "turbo run build --filter=api",
+    "build:web": "turbo run build --filter=web",
+    "dev": "turbo run dev",
+    "dev:api": "turbo run dev --filter=api",
+    "dev:web": "turbo run dev --filter=web",
+    "start": "turbo run start",
+    "start:all": "turbo run start",
+    "start:api": "turbo run start --filter=api",
+    "start:web": "turbo run start --filter=web",
+    "clean": "turbo run clean",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "db:generate": "cd apps/api && npx drizzle-kit generate",
+    "db:migrate": "cd apps/api && npx drizzle-kit migrate",
+    "db:studio": "cd apps/api && npx drizzle-kit studio",
+    "db:push": "cd apps/api && npx drizzle-kit push",
+    "db:seed": "cd apps/api && npx ts-node src/db/seed.ts",
+    "test:load": "k6 run __tests__/load.js",
+    "test:browser": "k6 run __tests__/browser.js"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "turbo": "^2.4.4"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "yarn@1.22.22",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}

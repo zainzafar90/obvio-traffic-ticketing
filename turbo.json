@@ -1,0 +1,45 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "globalEnv": [
+    "NODE_ENV",
+    "PORT",
+    "DB_URL",
+    "REDIS_HOST",
+    "REDIS_PORT",
+    "JWT_SECRET",
+    "JWT_ACCESS_EXPIRATION_MINUTES",
+    "JWT_REFRESH_EXPIRATION_DAYS",
+    "JWT_RESET_PASSWORD_EXPIRATION_MINUTES",
+    "JWT_VERIFY_EMAIL_EXPIRATION_MINUTES",
+    "SMTP_HOST",
+    "SMTP_PORT",
+    "SMTP_USERNAME",
+    "SMTP_PASSWORD",
+    "EMAIL_FROM",
+    "CLIENT_URL",
+    "COOKIE_SECRET"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "check-types": {
+      "dependsOn": ["^check-types"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "start": {
+      "cache": false,
+      "dependsOn": ["build"],
+      "env": ["NEXT_PUBLIC_API_HOST"]
+    }
+  }
+}
