@@ -34,6 +34,7 @@ const shortcutCategories = [
       { action: "Reject: Main camera issue", keys: ["C"] },
       { action: "Reject: License plate issue", keys: ["L"] },
       { action: "Reject: DMV information issue", keys: ["D"] },
+      { action: "Skip to next event", keys: ["N"] },
     ],
   },
 ];
