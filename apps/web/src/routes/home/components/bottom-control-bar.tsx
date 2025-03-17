@@ -38,6 +38,7 @@ export const BottomControlBar = ({
   const [countdownTime, setCountdownTime] = useState(10);
   const [isConfirmingReject, setIsConfirmingReject] = useState(false);
   const [isConfirmingApprove, setIsConfirmingApprove] = useState(false);
+  const [isConfirmingNext, setIsConfirmingNext] = useState(false);
   const [selectedReason, setSelectedReason] = useState<RejectionReason | null>(
     null
   );
@@ -61,6 +62,35 @@ export const BottomControlBar = ({
   useHotkeys("v", () => toggleLicensePlateExpanded(), {
     preventDefault: true,
   });
+
+  useHotkeys("n", () => handleNextEventClick(), {
+    preventDefault: true,
+  });
+
+  const handleNextEventClick = () => {
+    if (
+      eventStatus === EventStatus.PENDING ||
+      eventStatus === EventStatus.IDLE
+    ) {
+      return;
+    }
+
+    if (isConfirmingNext) {
+      completeNextEvent();
+      return;
+    }
+
+    setIsConfirmingNext(true);
+
+    setTimeout(() => {
+      setIsConfirmingNext(false);
+    }, 3000);
+  };
+
+  const completeNextEvent = () => {
+    setIsConfirmingNext(false);
+    onFetchNextEvent();
+  };
 
   const handleDropdownClick = () => {
     if (isConfirmingReject) {
@@ -229,10 +259,11 @@ export const BottomControlBar = ({
               eventStatus === EventStatus.PENDING ||
               eventStatus === EventStatus.IDLE
             }
-            className="text-zinc-500 hover:text-zinc-700"
-            onClick={onFetchNextEvent}
+            className={`text-zinc-500 hover:text-zinc-700 ${isConfirmingNext ? "animate-pulse" : ""}`}
+            onClick={handleNextEventClick}
           >
-            Next Event
+            <Kbd className="bg-muted text-muted-foreground">N</Kbd>
+            {isConfirmingNext ? "Confirm Next Event" : "Next Event"}
           </Button>
         </div>
 
