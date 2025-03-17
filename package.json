@@ -22,7 +22,7 @@
     "db:push": "cd apps/api && npx drizzle-kit push",
     "db:seed": "cd apps/api && npx ts-node src/db/seed.ts",
     "test:load": "k6 run __tests__/load.js",
-    "test:browser": "k6 run __tests__/browser.js"
+    "test:browser": "K6_BROWSER_HEADLESS=false k6 run __tests__/browser.js"
   },
   "devDependencies": {
     "prettier": "^3.5.3",

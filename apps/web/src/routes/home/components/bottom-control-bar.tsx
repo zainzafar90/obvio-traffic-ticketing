@@ -239,6 +239,7 @@ export const BottomControlBar = ({
         {/* Right Section */}
         <div className="flex flex-1 items-center justify-end space-x-2">
           <Button
+            data-testid="accept-button"
             color={
               eventStatus === EventStatus.APPROVED
                 ? "green"
@@ -260,6 +261,7 @@ export const BottomControlBar = ({
 
           {isConfirmingReject ? (
             <Button
+              data-testid="confirm-reject-button"
               color="red"
               className="animate-pulse"
               onClick={() =>
@@ -272,6 +274,7 @@ export const BottomControlBar = ({
           ) : (
             <Dropdown>
               <DropdownButton
+                data-testid="reject-dropdown-button"
                 color={eventStatus === EventStatus.REJECTED ? "red" : "zinc"}
                 onClick={toggleDropdown}
                 data-dropdown-button="true"
@@ -288,6 +291,7 @@ export const BottomControlBar = ({
               </DropdownButton>
               <DropdownMenu anchor="bottom start" className="min-w-48">
                 <DropdownItem
+                  data-testid="reject-false-positive"
                   onClick={() => handleSelect(RejectionReason.FALSE_POSITIVE)}
                   destructive
                 >
@@ -297,6 +301,7 @@ export const BottomControlBar = ({
                   </DropdownShortcut>
                 </DropdownItem>
                 <DropdownItem
+                  data-testid="reject-main-camera-issue"
                   onClick={() =>
                     handleSelect(RejectionReason.MAIN_CAMERA_ISSUE)
                   }
@@ -308,6 +313,7 @@ export const BottomControlBar = ({
                   </DropdownShortcut>
                 </DropdownItem>
                 <DropdownItem
+                  data-testid="reject-license-plate-issue"
                   onClick={() =>
                     handleSelect(RejectionReason.LICENSE_PLATE_ISSUE)
                   }
@@ -319,6 +325,7 @@ export const BottomControlBar = ({
                   </DropdownShortcut>
                 </DropdownItem>
                 <DropdownItem
+                  data-testid="reject-dmv-information-issue"
                   onClick={() =>
                     handleSelect(RejectionReason.DMV_INFORMATION_ISSUE)
                   }
