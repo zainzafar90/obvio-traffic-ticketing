@@ -22,11 +22,14 @@ const shortcutCategories = [
     ],
   },
   {
+    name: "License Plate Controls",
+    shortcuts: [{ action: "Verify license plate", keys: ["V"] }],
+  },
+  {
     name: "Event Actions",
     shortcuts: [
       { action: "Accept event", keys: ["A"] },
       { action: "Reject event", keys: ["R"] },
-      { action: "Toggle license plate details", keys: ["D"] },
       { action: "Reject: False positive", keys: ["F"] },
       { action: "Reject: Main camera issue", keys: ["C"] },
       { action: "Reject: License plate issue", keys: ["L"] },

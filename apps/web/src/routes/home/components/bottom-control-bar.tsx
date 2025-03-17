@@ -58,7 +58,7 @@ export const BottomControlBar = ({
     preventDefault: true,
   });
 
-  useHotkeys("d", () => toggleLicensePlateExpanded(), {
+  useHotkeys("v", () => toggleLicensePlateExpanded(), {
     preventDefault: true,
   });
 
