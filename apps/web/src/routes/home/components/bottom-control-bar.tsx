@@ -26,6 +26,9 @@ interface BottomControlBarProps {
   onFetchNextEvent: () => void;
 }
 
+const DEFAULT_CONFIRMATION_DURATION = 3000;
+const DEFAULT_COUNTDOWN_TIME = 5;
+
 export const BottomControlBar = ({
   event,
   onFetchNextEvent,
@@ -35,7 +38,7 @@ export const BottomControlBar = ({
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isCountingDown, setIsCountingDown] = useState(false);
-  const [countdownTime, setCountdownTime] = useState(10);
+  const [countdownTime, setCountdownTime] = useState(DEFAULT_COUNTDOWN_TIME);
   const [isConfirmingReject, setIsConfirmingReject] = useState(false);
   const [isConfirmingApprove, setIsConfirmingApprove] = useState(false);
   const [isConfirmingNext, setIsConfirmingNext] = useState(false);
@@ -84,7 +87,7 @@ export const BottomControlBar = ({
 
     setTimeout(() => {
       setIsConfirmingNext(false);
-    }, 3000);
+    }, DEFAULT_CONFIRMATION_DURATION);
   };
 
   const completeNextEvent = () => {
@@ -121,7 +124,7 @@ export const BottomControlBar = ({
     setTimeout(() => {
       setIsConfirmingReject(false);
       setSelectedReason(null);
-    }, 3000);
+    }, DEFAULT_CONFIRMATION_DURATION);
   };
 
   const completeRejection = (action: RejectionReason) => {
@@ -145,7 +148,7 @@ export const BottomControlBar = ({
 
     setTimeout(() => {
       setIsConfirmingApprove(false);
-    }, 3000);
+    }, DEFAULT_CONFIRMATION_DURATION);
   };
 
   const completeApproval = () => {
@@ -170,7 +173,7 @@ export const BottomControlBar = ({
   };
 
   const countdownProgressPercentage = isCountingDown
-    ? ((10 - countdownTime) / 10) * 100
+    ? ((DEFAULT_COUNTDOWN_TIME - countdownTime) / DEFAULT_COUNTDOWN_TIME) * 100
     : 0;
 
   useEffect(() => {
@@ -208,7 +211,7 @@ export const BottomControlBar = ({
       eventStatus === EventStatus.PENDING
     ) {
       setIsCountingDown(false);
-      setCountdownTime(10);
+      setCountdownTime(DEFAULT_COUNTDOWN_TIME);
     }
   }, [eventStatus]);
 
