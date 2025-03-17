@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
+import {
+  CreditCardIcon,
+  IdentificationIcon,
+  VideoCameraSlashIcon,
+  XCircleIcon,
+} from "@heroicons/react/16/solid";
 import { ChevronDownIcon, ChevronUpIcon, Pause, Play } from "lucide-react";
 import { useHotkeys } from "react-hotkeys-hook";
 
@@ -329,6 +335,7 @@ export const BottomControlBar = ({
                   onClick={() => handleSelect(RejectionReason.FALSE_POSITIVE)}
                   destructive
                 >
+                  <XCircleIcon className="size-4" />
                   <DropdownLabel>False positive</DropdownLabel>
                   <DropdownShortcut keys="F">
                     <Kbd>F</Kbd>
@@ -341,6 +348,7 @@ export const BottomControlBar = ({
                   }
                   destructive
                 >
+                  <VideoCameraSlashIcon className="size-4" />
                   <DropdownLabel>Main camera issue</DropdownLabel>
                   <DropdownShortcut keys="M">
                     <Kbd>C</Kbd>
@@ -353,6 +361,7 @@ export const BottomControlBar = ({
                   }
                   destructive
                 >
+                  <CreditCardIcon className="size-4" />
                   <DropdownLabel>License plate issue</DropdownLabel>
                   <DropdownShortcut keys="L">
                     <Kbd>L</Kbd>
@@ -365,6 +374,7 @@ export const BottomControlBar = ({
                   }
                   destructive
                 >
+                  <IdentificationIcon className="size-4" />
                   <DropdownLabel>DMV information issue</DropdownLabel>
                   <DropdownShortcut keys="D">
                     <Kbd>D</Kbd>
